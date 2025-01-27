@@ -1,0 +1,23 @@
+// Export pages
+export '/sign_in_and_sign_up_pages/sign_up_page/sign_up_page_widget.dart'
+    show SignUpPageWidget;
+export '/end_users_pages/user_home_page/user_home_page_widget.dart'
+    show UserHomePageWidget;
+export '/sign_in_and_sign_up_pages/sign_in_page/sign_in_page_widget.dart'
+    show SignInPageWidget;
+export '/end_users_pages/member_settings_page/member_settings_page_widget.dart'
+    show MemberSettingsPageWidget;
+export '/admin_panel/dashboard_responsive_admin_panel/dashboard_responsive_admin_panel_widget.dart'
+    show DashboardResponsiveAdminPanelWidget;
+export '/admin_panel/users_responsive_admin_panel/users_responsive_admin_panel_widget.dart'
+    show UsersResponsiveAdminPanelWidget;
+export '/employees_pages/employee_home_page/employee_home_page_widget.dart'
+    show EmployeeHomePageWidget;
+export '/master_admin_pages/master_admin_home_page/master_admin_home_page_widget.dart'
+    show MasterAdminHomePageWidget;
+export '/sign_in_and_sign_up_pages/home_page/home_page_widget.dart'
+    show HomePageWidget;
+export '/master_admin_pages/add_new_company/add_new_company_widget.dart'
+    show AddNewCompanyWidget;
+export '/sign_in_and_sign_up_pages/sign_up_new_page/sign_up_new_page_widget.dart'
+    show SignUpNewPageWidget;
