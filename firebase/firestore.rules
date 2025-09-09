@@ -21,5 +21,138 @@ service cloud.firestore {
       allow write: if true;
       allow delete: if true;
     }
+
+    match /approvedEmails/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /countries/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /pendingTransactions/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /users/{parent}/userCompanies/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/userCompanies/{document} {
+      allow read: if true;
+    }
+
+
+    match /companies/{parent}/rewards/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/rewards/{document} {
+      allow read: if true;
+    }
+
+
+    match /readers/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /globalTransactions/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /transactions/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /companies/{parent}/promos/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/promos/{document} {
+      allow read: if true;
+    }
+
+
+    match /groups/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /groups/{parent}/groupUsers/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/groupUsers/{document} {
+      allow read: if true;
+    }
+
+
+    match /companies/{parent}/monthlyRevenue/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/monthlyRevenue/{document} {
+      allow read: if true;
+    }
+
+
+    match /companies/{parent}/additionalCashbackPercentages/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/additionalCashbackPercentages/{document} {
+      allow read: if true;
+    }
+
+
+    match /companies/{parent}/financialMemos/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/financialMemos/{document} {
+      allow read: if true;
+    }
+
   }
 }

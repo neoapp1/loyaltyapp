@@ -2,10 +2,12 @@
     package="com.mycompany.auth2"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" tools:replace="android:maxSdkVersion"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" tools:replace="android:maxSdkVersion"/>
 
     <application
-        android:label="auth2"
+        android:label="Neo One"
         tools:replace="android:label"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
@@ -45,7 +47,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="auth2" android:host="auth2.com" />
+                <data android:scheme="neoone" android:host="neoone.com" />
             </intent-filter>
 
         </activity>
@@ -55,6 +57,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
 
 
 

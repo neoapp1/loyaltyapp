@@ -1,4 +1,4 @@
-# auth2
+# Neo One
 
 A new Flutter project.
 

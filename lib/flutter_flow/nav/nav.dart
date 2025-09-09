@@ -2,12 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/index.dart';
+import '/backend/push_notifications/push_notifications_handler.dart'
+    show PushNotificationsHandler;
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+
+import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -75,68 +79,427 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const HomePageWidget() : const SignInPageWidget(),
+          appStateNotifier.loggedIn ? HomePageWidget() : SignInPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const HomePageWidget() : const SignInPageWidget(),
+              appStateNotifier.loggedIn ? HomePageWidget() : SignInPageWidget(),
         ),
         FFRoute(
-          name: 'SignUpPage',
-          path: '/signUpPage',
-          builder: (context, params) => const SignUpPageWidget(),
+          name: SignUpPageWidget.routeName,
+          path: SignUpPageWidget.routePath,
+          builder: (context, params) => SignUpPageWidget(
+            emailAccount: params.getParam(
+              'emailAccount',
+              ParamType.String,
+            ),
+            companyId: params.getParam(
+              'companyId',
+              ParamType.String,
+            ),
+            isAdmin: params.getParam(
+              'isAdmin',
+              ParamType.bool,
+            ),
+            isEmployee: params.getParam(
+              'isEmployee',
+              ParamType.bool,
+            ),
+            isUser: params.getParam(
+              'isUser',
+              ParamType.bool,
+            ),
+            isMasterAdmin: params.getParam(
+              'isMasterAdmin',
+              ParamType.bool,
+            ),
+            hasScannerAccess: params.getParam(
+              'hasScannerAccess',
+              ParamType.bool,
+            ),
+            hasWebAdminAccess: params.getParam(
+              'hasWebAdminAccess',
+              ParamType.bool,
+            ),
+          ),
         ),
         FFRoute(
-          name: 'UserHomePage',
-          path: '/userHomePage',
-          builder: (context, params) => const UserHomePageWidget(),
+          name: UserHomePageWidget.routeName,
+          path: UserHomePageWidget.routePath,
+          builder: (context, params) => UserHomePageWidget(),
         ),
         FFRoute(
-          name: 'SignInPage',
-          path: '/signInPage',
-          builder: (context, params) => const SignInPageWidget(),
+          name: SignInPageWidget.routeName,
+          path: SignInPageWidget.routePath,
+          builder: (context, params) => SignInPageWidget(),
         ),
         FFRoute(
-          name: 'memberSettingsPage',
-          path: '/memberSettingsPage',
-          builder: (context, params) => const MemberSettingsPageWidget(),
+          name: MemberSettingsPageWidget.routeName,
+          path: MemberSettingsPageWidget.routePath,
+          builder: (context, params) => MemberSettingsPageWidget(),
         ),
         FFRoute(
-          name: 'DashboardResponsiveAdminPanel',
-          path: '/dashboardResponsiveAdminPanel',
-          builder: (context, params) => const DashboardResponsiveAdminPanelWidget(),
+          name: DashboardResponsiveAdminPanelWidget.routeName,
+          path: DashboardResponsiveAdminPanelWidget.routePath,
+          builder: (context, params) => DashboardResponsiveAdminPanelWidget(),
         ),
         FFRoute(
-          name: 'UsersResponsiveAdminPanel',
-          path: '/usersResponsiveAdminPanel',
-          builder: (context, params) => const UsersResponsiveAdminPanelWidget(),
+          name: NewUserAdminPanelWidget.routeName,
+          path: NewUserAdminPanelWidget.routePath,
+          builder: (context, params) => NewUserAdminPanelWidget(),
         ),
         FFRoute(
-          name: 'employeeHomePage',
-          path: '/employeeHomePage',
-          builder: (context, params) => const EmployeeHomePageWidget(),
+          name: EmployeeHomePageWidget.routeName,
+          path: EmployeeHomePageWidget.routePath,
+          builder: (context, params) => EmployeeHomePageWidget(),
         ),
         FFRoute(
-          name: 'masterAdminHomePage',
-          path: '/masterAdminHomePage',
-          builder: (context, params) => const MasterAdminHomePageWidget(),
+          name: MasterAdminHomePageWidget.routeName,
+          path: MasterAdminHomePageWidget.routePath,
+          builder: (context, params) => MasterAdminHomePageWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => const HomePageWidget(),
+          name: HomePageWidget.routeName,
+          path: HomePageWidget.routePath,
+          builder: (context, params) => HomePageWidget(),
         ),
         FFRoute(
-          name: 'addNewCompany',
-          path: '/addNewCompany',
-          builder: (context, params) => const AddNewCompanyWidget(),
+          name: SignUpNewPageWidget.routeName,
+          path: SignUpNewPageWidget.routePath,
+          builder: (context, params) => SignUpNewPageWidget(),
         ),
         FFRoute(
-          name: 'SignUpNewPage',
-          path: '/signUpNewPage',
-          builder: (context, params) => const SignUpNewPageWidget(),
+          name: VerificationCodeWidget.routeName,
+          path: VerificationCodeWidget.routePath,
+          builder: (context, params) => VerificationCodeWidget(
+            emailAccount: params.getParam(
+              'emailAccount',
+              ParamType.String,
+            ),
+            companyId: params.getParam(
+              'companyId',
+              ParamType.String,
+            ),
+            isAdmin: params.getParam(
+              'isAdmin',
+              ParamType.bool,
+            ),
+            isUser: params.getParam(
+              'isUser',
+              ParamType.bool,
+            ),
+            isEmployee: params.getParam(
+              'isEmployee',
+              ParamType.bool,
+            ),
+            isMasterAdmin: params.getParam(
+              'isMasterAdmin',
+              ParamType.bool,
+            ),
+            hasScannerAccess: params.getParam(
+              'hasScannerAccess',
+              ParamType.bool,
+            ),
+            hasWebAdminAccess: params.getParam(
+              'hasWebAdminAccess',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: EndUserFormWidget.routeName,
+          path: EndUserFormWidget.routePath,
+          builder: (context, params) => EndUserFormWidget(),
+        ),
+        FFRoute(
+          name: CashbackUsersWidget.routeName,
+          path: CashbackUsersWidget.routePath,
+          builder: (context, params) => CashbackUsersWidget(),
+        ),
+        FFRoute(
+          name: VisitRewardUsersWidget.routeName,
+          path: VisitRewardUsersWidget.routePath,
+          builder: (context, params) => VisitRewardUsersWidget(),
+        ),
+        FFRoute(
+          name: PointsbasedUsersWidget.routeName,
+          path: PointsbasedUsersWidget.routePath,
+          builder: (context, params) => PointsbasedUsersWidget(),
+        ),
+        FFRoute(
+          name: RegisteredUserAdminPanelWidget.routeName,
+          path: RegisteredUserAdminPanelWidget.routePath,
+          builder: (context, params) => RegisteredUserAdminPanelWidget(),
+        ),
+        FFRoute(
+          name: LoyaltySchemeSettingsGameOneWidget.routeName,
+          path: LoyaltySchemeSettingsGameOneWidget.routePath,
+          builder: (context, params) => LoyaltySchemeSettingsGameOneWidget(),
+        ),
+        FFRoute(
+          name: LoyaltySchemeSettingsRewardOneWidget.routeName,
+          path: LoyaltySchemeSettingsRewardOneWidget.routePath,
+          builder: (context, params) => LoyaltySchemeSettingsRewardOneWidget(),
+        ),
+        FFRoute(
+          name: LoyaltyCashbackWidget.routeName,
+          path: LoyaltyCashbackWidget.routePath,
+          builder: (context, params) => LoyaltyCashbackWidget(),
+        ),
+        FFRoute(
+          name: NewAdminWidget.routeName,
+          path: NewAdminWidget.routePath,
+          builder: (context, params) => NewAdminWidget(),
+        ),
+        FFRoute(
+          name: RegisteredAdminWidget.routeName,
+          path: RegisteredAdminWidget.routePath,
+          builder: (context, params) => RegisteredAdminWidget(),
+        ),
+        FFRoute(
+          name: RewardSettingsWidget.routeName,
+          path: RewardSettingsWidget.routePath,
+          builder: (context, params) => RewardSettingsWidget(),
+        ),
+        FFRoute(
+          name: ReadersWidget.routeName,
+          path: ReadersWidget.routePath,
+          builder: (context, params) => ReadersWidget(),
+        ),
+        FFRoute(
+          name: SelectVendorWidget.routeName,
+          path: SelectVendorWidget.routePath,
+          builder: (context, params) => SelectVendorWidget(),
+        ),
+        FFRoute(
+          name: DeletethisasapWidget.routeName,
+          path: DeletethisasapWidget.routePath,
+          builder: (context, params) => DeletethisasapWidget(),
+        ),
+        FFRoute(
+          name: ErrorAdminAccessWidget.routeName,
+          path: ErrorAdminAccessWidget.routePath,
+          builder: (context, params) => ErrorAdminAccessWidget(),
+        ),
+        FFRoute(
+          name: CompanyInfoWidget.routeName,
+          path: CompanyInfoWidget.routePath,
+          builder: (context, params) => CompanyInfoWidget(),
+        ),
+        FFRoute(
+          name: TransactionPageWidget.routeName,
+          path: TransactionPageWidget.routePath,
+          builder: (context, params) => TransactionPageWidget(),
+        ),
+        FFRoute(
+          name: PromosPageWidget.routeName,
+          path: PromosPageWidget.routePath,
+          builder: (context, params) => PromosPageWidget(),
+        ),
+        FFRoute(
+          name: OptionalPrepaidModulesExample1Widget.routeName,
+          path: OptionalPrepaidModulesExample1Widget.routePath,
+          builder: (context, params) => OptionalPrepaidModulesExample1Widget(),
+        ),
+        FFRoute(
+          name: GroupsPageWidget.routeName,
+          path: GroupsPageWidget.routePath,
+          builder: (context, params) => GroupsPageWidget(),
+        ),
+        FFRoute(
+          name: AddUsersGroupWidget.routeName,
+          path: AddUsersGroupWidget.routePath,
+          asyncParams: {
+            'groupData': getDoc(['groups'], GroupsRecord.fromSnapshot),
+          },
+          builder: (context, params) => AddUsersGroupWidget(
+            groupData: params.getParam(
+              'groupData',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: EditUsersGroupWidget.routeName,
+          path: EditUsersGroupWidget.routePath,
+          asyncParams: {
+            'groupData': getDoc(['groups'], GroupsRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditUsersGroupWidget(
+            groupData: params.getParam(
+              'groupData',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: TransactionHistoryWidget.routeName,
+          path: TransactionHistoryWidget.routePath,
+          asyncParams: {
+            'companyReference':
+                getDoc(['companies'], CompaniesRecord.fromSnapshot),
+          },
+          builder: (context, params) => TransactionHistoryWidget(
+            companyReference: params.getParam(
+              'companyReference',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: PromosAvailableWidget.routeName,
+          path: PromosAvailableWidget.routePath,
+          builder: (context, params) => PromosAvailableWidget(
+            companyRef: params.getParam(
+              'companyRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['companies'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: SettingsUserWidget.routeName,
+          path: SettingsUserWidget.routePath,
+          asyncParams: {
+            'companyData': getDoc(['companies'], CompaniesRecord.fromSnapshot),
+          },
+          builder: (context, params) => SettingsUserWidget(
+            companyData: params.getParam(
+              'companyData',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: MainSettingsWidget.routeName,
+          path: MainSettingsWidget.routePath,
+          asyncParams: {
+            'companyData': getDoc(['companies'], CompaniesRecord.fromSnapshot),
+          },
+          builder: (context, params) => MainSettingsWidget(
+            companyData: params.getParam(
+              'companyData',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: OptionalPaidModulesExampleWidget.routeName,
+          path: OptionalPaidModulesExampleWidget.routePath,
+          builder: (context, params) => OptionalPaidModulesExampleWidget(),
+        ),
+        FFRoute(
+          name: PaidModulesWidget.routeName,
+          path: PaidModulesWidget.routePath,
+          builder: (context, params) => PaidModulesWidget(),
+        ),
+        FFRoute(
+          name: UserGroupsPageWidget.routeName,
+          path: UserGroupsPageWidget.routePath,
+          builder: (context, params) => UserGroupsPageWidget(),
+        ),
+        FFRoute(
+          name: PolicyAndPrivacyPageWidget.routeName,
+          path: PolicyAndPrivacyPageWidget.routePath,
+          builder: (context, params) => PolicyAndPrivacyPageWidget(),
+        ),
+        FFRoute(
+          name: QrVendorUserPageWidget.routeName,
+          path: QrVendorUserPageWidget.routePath,
+          builder: (context, params) => QrVendorUserPageWidget(),
+        ),
+        FFRoute(
+          name: ScanVendorEmailVerificationWidget.routeName,
+          path: ScanVendorEmailVerificationWidget.routePath,
+          asyncParams: {
+            'companyData': getDoc(['companies'], CompaniesRecord.fromSnapshot),
+          },
+          builder: (context, params) => ScanVendorEmailVerificationWidget(
+            companyData: params.getParam(
+              'companyData',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: CompanyDetailsEndUserWidget.routeName,
+          path: CompanyDetailsEndUserWidget.routePath,
+          asyncParams: {
+            'companyData': getDoc(['companies'], CompaniesRecord.fromSnapshot),
+          },
+          builder: (context, params) => CompanyDetailsEndUserWidget(
+            companyData: params.getParam(
+              'companyData',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: Exxamlple4Widget.routeName,
+          path: Exxamlple4Widget.routePath,
+          builder: (context, params) => Exxamlple4Widget(),
+        ),
+        FFRoute(
+          name: RegisteredUserAdminPanelTelephoneNumberWidget.routeName,
+          path: RegisteredUserAdminPanelTelephoneNumberWidget.routePath,
+          builder: (context, params) =>
+              RegisteredUserAdminPanelTelephoneNumberWidget(),
+        ),
+        FFRoute(
+          name: RegisteredUserAdminPanelNameWidget.routeName,
+          path: RegisteredUserAdminPanelNameWidget.routePath,
+          builder: (context, params) => RegisteredUserAdminPanelNameWidget(),
+        ),
+        FFRoute(
+          name: RegisteredAdminNameWidget.routeName,
+          path: RegisteredAdminNameWidget.routePath,
+          builder: (context, params) => RegisteredAdminNameWidget(),
+        ),
+        FFRoute(
+          name: RegisteredAdminTelephoneNumberWidget.routeName,
+          path: RegisteredAdminTelephoneNumberWidget.routePath,
+          builder: (context, params) => RegisteredAdminTelephoneNumberWidget(),
+        ),
+        FFRoute(
+          name: LoyaltyCashbackCopyWidget.routeName,
+          path: LoyaltyCashbackCopyWidget.routePath,
+          builder: (context, params) => LoyaltyCashbackCopyWidget(),
+        ),
+        FFRoute(
+          name: UsersTransactionHistoryWidget.routeName,
+          path: UsersTransactionHistoryWidget.routePath,
+          asyncParams: {
+            'companyReference':
+                getDoc(['companies'], CompaniesRecord.fromSnapshot),
+            'userData': getDoc(
+                ['users', 'userCompanies'], UserCompaniesRecord.fromSnapshot),
+          },
+          builder: (context, params) => UsersTransactionHistoryWidget(
+            companyReference: params.getParam(
+              'companyReference',
+              ParamType.Document,
+            ),
+            userData: params.getParam(
+              'userData',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: RewardsProgramDetailsWidget.routeName,
+          path: RewardsProgramDetailsWidget.routePath,
+          asyncParams: {
+            'companyData': getDoc(['companies'], CompaniesRecord.fromSnapshot),
+          },
+          builder: (context, params) => RewardsProgramDetailsWidget(
+            companyData: params.getParam(
+              'companyData',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -256,6 +619,7 @@ class FFParameters {
     ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -274,6 +638,7 @@ class FFParameters {
       type,
       isList,
       collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
     );
   }
 }
@@ -321,18 +686,16 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
+              ? isWeb
+                  ? Container()
+                  : Container(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      child: Image.asset(
+                        'assets/images/play_store_512.png',
+                        fit: BoxFit.contain,
                       ),
-                    ),
-                  ),
-                )
-              : page;
+                    )
+              : PushNotificationsHandler(child: page);
 
           final transitionInfo = state.transitionInfo;
           return transitionInfo.hasTransition
@@ -374,7 +737,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

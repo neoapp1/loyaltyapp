@@ -9,9 +9,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class UsersRecord extends FirestoreRecord {
   UsersRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 
@@ -70,6 +70,51 @@ class UsersRecord extends FirestoreRecord {
   bool get isUser => _isUser ?? false;
   bool hasIsUser() => _isUser != null;
 
+  // "hasScannerAccess" field.
+  bool? _hasScannerAccess;
+  bool get hasScannerAccess => _hasScannerAccess ?? false;
+  bool hasHasScannerAccess() => _hasScannerAccess != null;
+
+  // "hasWebAdminAccess" field.
+  bool? _hasWebAdminAccess;
+  bool get hasWebAdminAccess => _hasWebAdminAccess ?? false;
+  bool hasHasWebAdminAccess() => _hasWebAdminAccess != null;
+
+  // "userCountryCode" field.
+  String? _userCountryCode;
+  String get userCountryCode => _userCountryCode ?? '';
+  bool hasUserCountryCode() => _userCountryCode != null;
+
+  // "dayOfBirth" field.
+  String? _dayOfBirth;
+  String get dayOfBirth => _dayOfBirth ?? '';
+  bool hasDayOfBirth() => _dayOfBirth != null;
+
+  // "monthOfBirth" field.
+  String? _monthOfBirth;
+  String get monthOfBirth => _monthOfBirth ?? '';
+  bool hasMonthOfBirth() => _monthOfBirth != null;
+
+  // "genderType" field.
+  String? _genderType;
+  String get genderType => _genderType ?? '';
+  bool hasGenderType() => _genderType != null;
+
+  // "city" field.
+  String? _city;
+  String get city => _city ?? '';
+  bool hasCity() => _city != null;
+
+  // "postalCode" field.
+  String? _postalCode;
+  String get postalCode => _postalCode ?? '';
+  bool hasPostalCode() => _postalCode != null;
+
+  // "pushNotification" field.
+  bool? _pushNotification;
+  bool get pushNotification => _pushNotification ?? false;
+  bool hasPushNotification() => _pushNotification != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -82,6 +127,15 @@ class UsersRecord extends FirestoreRecord {
     _isMasterAdmin = snapshotData['isMasterAdmin'] as bool?;
     _isEmployee = snapshotData['isEmployee'] as bool?;
     _isUser = snapshotData['isUser'] as bool?;
+    _hasScannerAccess = snapshotData['hasScannerAccess'] as bool?;
+    _hasWebAdminAccess = snapshotData['hasWebAdminAccess'] as bool?;
+    _userCountryCode = snapshotData['userCountryCode'] as String?;
+    _dayOfBirth = snapshotData['dayOfBirth'] as String?;
+    _monthOfBirth = snapshotData['monthOfBirth'] as String?;
+    _genderType = snapshotData['genderType'] as String?;
+    _city = snapshotData['city'] as String?;
+    _postalCode = snapshotData['postalCode'] as String?;
+    _pushNotification = snapshotData['pushNotification'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -129,6 +183,15 @@ Map<String, dynamic> createUsersRecordData({
   bool? isMasterAdmin,
   bool? isEmployee,
   bool? isUser,
+  bool? hasScannerAccess,
+  bool? hasWebAdminAccess,
+  String? userCountryCode,
+  String? dayOfBirth,
+  String? monthOfBirth,
+  String? genderType,
+  String? city,
+  String? postalCode,
+  bool? pushNotification,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -143,6 +206,15 @@ Map<String, dynamic> createUsersRecordData({
       'isMasterAdmin': isMasterAdmin,
       'isEmployee': isEmployee,
       'isUser': isUser,
+      'hasScannerAccess': hasScannerAccess,
+      'hasWebAdminAccess': hasWebAdminAccess,
+      'userCountryCode': userCountryCode,
+      'dayOfBirth': dayOfBirth,
+      'monthOfBirth': monthOfBirth,
+      'genderType': genderType,
+      'city': city,
+      'postalCode': postalCode,
+      'pushNotification': pushNotification,
     }.withoutNulls,
   );
 
@@ -164,7 +236,16 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.isAdmin == e2?.isAdmin &&
         e1?.isMasterAdmin == e2?.isMasterAdmin &&
         e1?.isEmployee == e2?.isEmployee &&
-        e1?.isUser == e2?.isUser;
+        e1?.isUser == e2?.isUser &&
+        e1?.hasScannerAccess == e2?.hasScannerAccess &&
+        e1?.hasWebAdminAccess == e2?.hasWebAdminAccess &&
+        e1?.userCountryCode == e2?.userCountryCode &&
+        e1?.dayOfBirth == e2?.dayOfBirth &&
+        e1?.monthOfBirth == e2?.monthOfBirth &&
+        e1?.genderType == e2?.genderType &&
+        e1?.city == e2?.city &&
+        e1?.postalCode == e2?.postalCode &&
+        e1?.pushNotification == e2?.pushNotification;
   }
 
   @override
@@ -179,7 +260,16 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.isAdmin,
         e?.isMasterAdmin,
         e?.isEmployee,
-        e?.isUser
+        e?.isUser,
+        e?.hasScannerAccess,
+        e?.hasWebAdminAccess,
+        e?.userCountryCode,
+        e?.dayOfBirth,
+        e?.monthOfBirth,
+        e?.genderType,
+        e?.city,
+        e?.postalCode,
+        e?.pushNotification
       ]);
 
   @override

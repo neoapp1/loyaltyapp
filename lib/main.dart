@@ -1,3 +1,5 @@
+import 'package:provider/provider.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'auth/firebase_auth/auth_util.dart';
 
+import 'backend/push_notifications/push_notifications_util.dart';
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
@@ -18,18 +21,30 @@ void main() async {
 
   await FFLocalizations.initialize();
 
-  runApp(const MyApp());
+  final appState = FFAppState(); // Initialize FFAppState
+  await appState.initializePersistedState();
+
+  runApp(ChangeNotifierProvider(
+    create: (context) => appState,
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   State<MyApp> createState() => _MyAppState();
 
   static _MyAppState of(BuildContext context) =>
       context.findAncestorStateOfType<_MyAppState>()!;
+}
+
+class MyAppScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
 
 class _MyAppState extends State<MyApp> {
@@ -48,9 +63,14 @@ class _MyAppState extends State<MyApp> {
     return matchList.uri.toString();
   }
 
+  List<String> getRouteStack() =>
+      _router.routerDelegate.currentConfiguration.matches
+          .map((e) => getRoute(e))
+          .toList();
   late Stream<BaseAuthUser> userStream;
 
   final authUserSub = authenticatedUserStream.listen((_) {});
+  final fcmTokenSub = fcmTokenUserStream.listen((_) {});
 
   @override
   void initState() {
@@ -58,13 +78,13 @@ class _MyAppState extends State<MyApp> {
 
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
-    userStream = auth2FirebaseUserStream()
+    userStream = neoOneFirebaseUserStream()
       ..listen((user) {
         _appStateNotifier.update(user);
       });
     jwtTokenStream.listen((_) {});
     Future.delayed(
-      const Duration(milliseconds: 1000),
+      Duration(milliseconds: isWeb ? 0 : 3000),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
   }
@@ -72,7 +92,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void dispose() {
     authUserSub.cancel();
-
+    fcmTokenSub.cancel();
     super.dispose();
   }
 
@@ -88,8 +108,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'auth2',
-      localizationsDelegates: const [
+      debugShowCheckedModeBanner: false,
+      title: 'Neo One',
+      scrollBehavior: MyAppScrollBehavior(),
+      localizationsDelegates: [
         FFLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -102,6 +124,11 @@ class _MyAppState extends State<MyApp> {
         Locale('en'),
         Locale('es'),
         Locale('it'),
+        Locale('el'),
+        Locale('fr'),
+        Locale('nl'),
+        Locale('de'),
+        Locale('pt'),
       ],
       theme: ThemeData(
         brightness: Brightness.light,

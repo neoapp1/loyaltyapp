@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>auth2</string>
+	<string>Neo One</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>auth2</string>
+	<string>Neo One</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleLocalizations</key>
@@ -21,6 +21,11 @@
 		<string>en</string>
 		<string>es</string>
 		<string>it</string>
+		<string>el</string>
+		<string>fr</string>
+		<string>nl</string>
+		<string>de</string>
+		<string>pt</string>
 	</array>
 
 	<key>CFBundleShortVersionString</key>
@@ -43,10 +48,10 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>auth2.com</string>
+        <string>neoone.com</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>auth2</string>
+        <string>neoone</string>
         </array>
         </dict>
     </array>
@@ -59,7 +64,16 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
+	<key>NSCameraUsageDescription</key>
+    <string>In order to scan for barcodes and QR codes, this app requires permission to access the camera.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>In order to upload data, this app requires permission to access the photo library.</string>
 
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
 
 
 

@@ -7,17 +7,93 @@ export '/sign_in_and_sign_up_pages/sign_in_page/sign_in_page_widget.dart'
     show SignInPageWidget;
 export '/end_users_pages/member_settings_page/member_settings_page_widget.dart'
     show MemberSettingsPageWidget;
-export '/admin_panel/dashboard_responsive_admin_panel/dashboard_responsive_admin_panel_widget.dart'
+export '/admin_panel/dashboard/dashboard_responsive_admin_panel/dashboard_responsive_admin_panel_widget.dart'
     show DashboardResponsiveAdminPanelWidget;
-export '/admin_panel/users_responsive_admin_panel/users_responsive_admin_panel_widget.dart'
-    show UsersResponsiveAdminPanelWidget;
+export '/admin_panel/members/new_user_admin_panel/new_user_admin_panel_widget.dart'
+    show NewUserAdminPanelWidget;
 export '/employees_pages/employee_home_page/employee_home_page_widget.dart'
     show EmployeeHomePageWidget;
 export '/master_admin_pages/master_admin_home_page/master_admin_home_page_widget.dart'
     show MasterAdminHomePageWidget;
 export '/sign_in_and_sign_up_pages/home_page/home_page_widget.dart'
     show HomePageWidget;
-export '/master_admin_pages/add_new_company/add_new_company_widget.dart'
-    show AddNewCompanyWidget;
 export '/sign_in_and_sign_up_pages/sign_up_new_page/sign_up_new_page_widget.dart'
     show SignUpNewPageWidget;
+export '/sign_in_and_sign_up_pages/verification_code/verification_code_widget.dart'
+    show VerificationCodeWidget;
+export '/end_user_form/end_user_form_widget.dart' show EndUserFormWidget;
+export '/end_users_cashback/cashback_users/cashback_users_widget.dart'
+    show CashbackUsersWidget;
+export '/end_users_cashback/visit_reward_users/visit_reward_users_widget.dart'
+    show VisitRewardUsersWidget;
+export '/end_users_cashback/pointsbased_users/pointsbased_users_widget.dart'
+    show PointsbasedUsersWidget;
+export '/admin_panel/members/registered_user_admin_panel/registered_user_admin_panel_widget.dart'
+    show RegisteredUserAdminPanelWidget;
+export '/admin_panel/loyalty_scheme/loyalty_scheme_settings_game_one/loyalty_scheme_settings_game_one_widget.dart'
+    show LoyaltySchemeSettingsGameOneWidget;
+export '/admin_panel/loyalty_scheme/loyalty_scheme_settings_reward_one/loyalty_scheme_settings_reward_one_widget.dart'
+    show LoyaltySchemeSettingsRewardOneWidget;
+export '/admin_panel/loyalty_scheme/loyalty_cashback/loyalty_cashback_widget.dart'
+    show LoyaltyCashbackWidget;
+export '/admin_panel/admins/new_admin/new_admin_widget.dart'
+    show NewAdminWidget;
+export '/admin_panel/admins/registered_admin/registered_admin_widget.dart'
+    show RegisteredAdminWidget;
+export '/admin_panel/rewards/reward_settings/reward_settings_widget.dart'
+    show RewardSettingsWidget;
+export '/admin_panel/readers/readers/readers_widget.dart' show ReadersWidget;
+export '/select_vendor/select_vendor_widget.dart' show SelectVendorWidget;
+export '/components/deletethisasap_widget.dart' show DeletethisasapWidget;
+export '/error_admin_access/error_admin_access_widget.dart'
+    show ErrorAdminAccessWidget;
+export '/admin_panel/company_info/company_info/company_info_widget.dart'
+    show CompanyInfoWidget;
+export '/transactions/transaction_page/transaction_page_widget.dart'
+    show TransactionPageWidget;
+export '/promos/promos_page/promos_page_widget.dart' show PromosPageWidget;
+export '/optional_prepaid_modules_example1/optional_prepaid_modules_example1_widget.dart'
+    show OptionalPrepaidModulesExample1Widget;
+export '/admin_panel/groups/groups_page/groups_page_widget.dart'
+    show GroupsPageWidget;
+export '/admin_panel/groups/add_users_group/add_users_group_widget.dart'
+    show AddUsersGroupWidget;
+export '/admin_panel/groups/edit_users_group/edit_users_group_widget.dart'
+    show EditUsersGroupWidget;
+export '/end_users_cashback/transaction_history/transaction_history_widget.dart'
+    show TransactionHistoryWidget;
+export '/end_users_cashback/promos_available/promos_available_widget.dart'
+    show PromosAvailableWidget;
+export '/end_users_cashback/settings_user/settings_user_widget.dart'
+    show SettingsUserWidget;
+export '/end_users_cashback/main_settings/main_settings_widget.dart'
+    show MainSettingsWidget;
+export '/optional_paid_modules_example/optional_paid_modules_example_widget.dart'
+    show OptionalPaidModulesExampleWidget;
+export '/admin_panel/paid_modules/paid_modules/paid_modules_widget.dart'
+    show PaidModulesWidget;
+export '/end_users_cashback/user_groups_page/user_groups_page_widget.dart'
+    show UserGroupsPageWidget;
+export '/end_users_cashback/policy_and_privacy_page/policy_and_privacy_page_widget.dart'
+    show PolicyAndPrivacyPageWidget;
+export '/end_users_cashback/qr_vendor_user_page/qr_vendor_user_page_widget.dart'
+    show QrVendorUserPageWidget;
+export '/sign_in_and_sign_up_pages/scan_vendor_email_verification/scan_vendor_email_verification_widget.dart'
+    show ScanVendorEmailVerificationWidget;
+export '/end_users_cashback/company_details_end_user/company_details_end_user_widget.dart'
+    show CompanyDetailsEndUserWidget;
+export '/exxamlple4/exxamlple4_widget.dart' show Exxamlple4Widget;
+export '/admin_panel/members/registered_user_admin_panel_telephone_number/registered_user_admin_panel_telephone_number_widget.dart'
+    show RegisteredUserAdminPanelTelephoneNumberWidget;
+export '/admin_panel/members/registered_user_admin_panel_name/registered_user_admin_panel_name_widget.dart'
+    show RegisteredUserAdminPanelNameWidget;
+export '/admin_panel/admins/registered_admin_name/registered_admin_name_widget.dart'
+    show RegisteredAdminNameWidget;
+export '/admin_panel/admins/registered_admin_telephone_number/registered_admin_telephone_number_widget.dart'
+    show RegisteredAdminTelephoneNumberWidget;
+export '/admin_panel/loyalty_scheme/loyalty_cashback_copy/loyalty_cashback_copy_widget.dart'
+    show LoyaltyCashbackCopyWidget;
+export '/admin_panel/members/users_transaction_history/users_transaction_history_widget.dart'
+    show UsersTransactionHistoryWidget;
+export '/end_users_cashback/rewards_program_details/rewards_program_details_widget.dart'
+    show RewardsProgramDetailsWidget;

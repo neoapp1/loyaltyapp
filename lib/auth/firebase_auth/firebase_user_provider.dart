@@ -5,10 +5,9 @@ import '../base_auth_user_provider.dart';
 
 export '../base_auth_user_provider.dart';
 
-class Auth2FirebaseUser extends BaseAuthUser {
-  Auth2FirebaseUser(this.user);
+class NeoOneFirebaseUser extends BaseAuthUser {
+  NeoOneFirebaseUser(this.user);
   User? user;
-  @override
   bool get loggedIn => user != null;
 
   @override
@@ -59,17 +58,17 @@ class Auth2FirebaseUser extends BaseAuthUser {
 
   static BaseAuthUser fromUserCredential(UserCredential userCredential) =>
       fromFirebaseUser(userCredential.user);
-  static BaseAuthUser fromFirebaseUser(User? user) => Auth2FirebaseUser(user);
+  static BaseAuthUser fromFirebaseUser(User? user) => NeoOneFirebaseUser(user);
 }
 
-Stream<BaseAuthUser> auth2FirebaseUserStream() => FirebaseAuth.instance
+Stream<BaseAuthUser> neoOneFirebaseUserStream() => FirebaseAuth.instance
         .authStateChanges()
         .debounce((user) => user == null && !loggedIn
             ? TimerStream(true, const Duration(seconds: 1))
             : Stream.value(user))
         .map<BaseAuthUser>(
       (user) {
-        currentUser = Auth2FirebaseUser(user);
+        currentUser = NeoOneFirebaseUser(user);
         return currentUser!;
       },
     );
